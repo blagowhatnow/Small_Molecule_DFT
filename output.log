@@ -1,0 +1,3 @@
+2022-07-17:17:30:38,849 INFO     [psi4.driver.task_planner:266] PLANNING Atomic:  keywords={'PCM': 1, 'PCM__PCMSOLVER_PARSED_FNAME': '/Users/bedabratachoudhury/Downloads/Graphene-Nanotube-main/@pcmsolver.40382.cebdcc49', 'PCM_SCF_TYPE': 'TOTAL', 'SCF_TYPE': 'DF', 'function_kwargs': {}}
+2022-07-17:17:30:38,856 INFO     [psi4.driver.driver:499] Compute energy(): method=b3lyp, basis=aug-cc-pvdz, molecule=molecule, nre=3679.5653640096434
+2022-07-17:18:13:01,959 INFO     [psi4.driver.driver:502] Return energy(): -944.0559400554982
