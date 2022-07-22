@@ -1,0 +1,65 @@
+set_num_threads(4)
+
+molecule molecule {
+
+0 1
+
+C          1.07120       -0.10540       -0.05200
+C          2.53700       -0.18760        0.29020
+O          2.91680       -0.03960        1.44640
+N          3.32440       -0.44230       -0.81910
+C          4.72640       -0.59580       -0.84080
+C          5.50340       -0.74460        0.31130
+C          6.89500       -0.85190        0.22410
+C          7.50800       -0.81200       -1.02130
+C          6.75150       -0.69420       -2.17930
+C          5.35940       -0.59590       -2.09000
+O          8.86330       -0.87940       -1.14660
+H          0.53880        0.40730        0.75490
+H          0.66830       -1.11510       -0.16370
+H          0.91790        0.46160       -0.97430
+H          2.86390       -0.43250       -1.72060
+H          5.05300       -0.79140        1.29780
+H          7.47110       -0.96110        1.13740
+H          7.24330       -0.66630       -3.14700
+H          4.78850       -0.49470       -3.00840
+H          9.25330       -0.89130       -0.25660
+
+
+units bohr
+no_reorient
+no_com
+
+}
+
+set {
+  basis STO-3G
+  scf_type df
+  pcm true
+  pcm_scf_type total
+}
+
+pcm = {
+   Units = Angstrom
+   Medium {
+   SolverType = IEFPCM
+   Solvent = Water
+   }
+
+   Cavity {
+   RadiiSet = UFF
+   Type = GePol
+   Scaling = False
+   Area = 0.3
+   Mode = Implicit
+   }
+}
+
+e, wfn = psi4.energy("B3LYP/aug-cc-pVDZ", return_wfn=True, molecule=molecule)
+
+HOMO = wfn.epsilon_a_subset('AO', 'ALL').np[wfn.nalpha()-1]
+LUMO = wfn.epsilon_a_subset('AO', 'ALL').np[wfn.nalpha()]
+
+print(HOMO, LUMO, e)
+
+
